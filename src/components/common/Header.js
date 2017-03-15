@@ -1,12 +1,14 @@
 import React, {PropTypes} from 'react';
-import { Link, IndexLink } from 'react-router';
+import NavLink from "../common/NavLink";
 
 const Header = () => {
+
   return (
-      <nav className="text-center">
-          <IndexLink to="/" activeClassName="active">Chart</IndexLink>
-          {" | "}
-          <Link to="/settings" activeClassName="active">Settings</Link>
+      <nav>
+          <ul className="nav nav-tabs nav-justified">
+              <NavLink to="/">Chart</NavLink>
+              <NavLink to="/settings">Settings</NavLink>
+          </ul>
       </nav>
   );
 };
