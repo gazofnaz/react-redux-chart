@@ -21,7 +21,7 @@ class SettingsPage extends React.Component {
         return(
             <div>
                 <h1>Settings</h1>
-                <SettingsList courses={courses}/>
+                <SettingsList settings={courses}/>
             </div>
         );
     }

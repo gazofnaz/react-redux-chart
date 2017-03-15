@@ -9,7 +9,7 @@ import SettingsListRow from './SettingsListRow';
  * @returns {XML}
  * @constructor
  */
-const SettingsList = ({courses}) => {
+const SettingsList = ({settings}) => {
     return (
         <table className="table">
             <thead>
@@ -20,7 +20,7 @@ const SettingsList = ({courses}) => {
             </tr>
             </thead>
             <tbody>
-            {courses.map(setting =>
+            {settings.map(setting =>
                 <SettingsListRow key={setting.title} setting={setting} />
             )}
             </tbody>
@@ -29,7 +29,7 @@ const SettingsList = ({courses}) => {
 };
 
 SettingsList.propTypes = {
-    courses: PropTypes.array.isRequired
+    settings: PropTypes.array.isRequired
 };
 
 export default SettingsList;
