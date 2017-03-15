@@ -7,6 +7,7 @@ import { Router, browserHistory } from 'react-router'; // browserHistory gives n
 import routes from './routes';
 import {loadCourses} from './actions/courseActions';
 import './styles/styles.css'; // webpack can import css (what about scss?)
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 
 /**

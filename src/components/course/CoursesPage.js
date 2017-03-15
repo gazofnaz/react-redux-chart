@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import * as courseActions from '../../actions/courseActions';
 import {bindActionCreators} from 'redux';
-import CourseList from './CourseList';
+import CourseList from '../course/CourseList';
 
 /**
  * List all the courses
@@ -13,21 +13,14 @@ class CoursesPage extends React.Component {
         super( props, context );
     }
 
-    // corn row. Would be nice to separate template from logic a little bit
-    courseRow(course, index) {
-        return <div key={index}>{course.title}</div>;
-    }
-
     // Don't define new functions inside a render call, it impacts performance
     render(){
-
         // How do we know courses will always be props? Anyway, it keeps things shorter
         const {courses} = this.props;
-
         // This becomes quite clean
         return(
             <div>
-                <h1>Courses</h1>
+                <h1>Settings</h1>
                 <CourseList courses={courses}/>
             </div>
         );

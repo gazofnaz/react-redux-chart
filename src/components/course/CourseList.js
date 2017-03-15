@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import CourseListRow from './CourseListRow';
+import SettingsListRow from './SettingsListRow';
 
 /**
  * We like to keep all presentation out of the container components
@@ -14,16 +14,14 @@ const CourseList = ({courses}) => {
         <table className="table">
             <thead>
             <tr>
-                <th>&nbsp;</th>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Category</th>
-                <th>Length</th>
+                <th>Setting</th>
+                <th>Value</th>
+                <th>Options</th>
             </tr>
             </thead>
             <tbody>
-            {courses.map(course =>
-                <CourseListRow key={course.id} course={course} />
+            {courses.map(setting =>
+                <SettingsListRow key={setting.title} setting={setting} />
             )}
             </tbody>
         </table>
