@@ -5,7 +5,7 @@ import {bindActionCreators} from 'redux';
 import SettingsList from '../course/SettingsList';
 
 /**
- * List all the courses
+ * List all the settings
  */
 class SettingsPage extends React.Component {
 
@@ -15,13 +15,13 @@ class SettingsPage extends React.Component {
 
     // Don't define new functions inside a render call, it impacts performance
     render(){
-        // How do we know courses will always be props? Anyway, it keeps things shorter
-        const {courses} = this.props;
+        // How do we know settings will always be props? Anyway, it keeps things shorter
+        const {settings} = this.props;
         // This becomes quite clean
         return(
             <div>
                 <h1>Settings</h1>
-                <SettingsList settings={courses}/>
+                <SettingsList settings={settings}/>
             </div>
         );
     }
@@ -32,14 +32,14 @@ class SettingsPage extends React.Component {
  * @type {{}}
  */
 SettingsPage.propTypes = {
-    courses: PropTypes.array.isRequired,
+    settings: PropTypes.array.isRequired,
     actions: PropTypes.object.isRequired
 };
 
 /**
  * Returns the properties we'd like to see exposed in our project, pulled from the current state
  *
- * Allows us to call this.props.courses
+ * Allows us to call this.props.settings
  *
  * @param state
  * @param ownProps
@@ -47,7 +47,7 @@ SettingsPage.propTypes = {
 function mapStateToProps(state, ownProps){
     return{
         // get course data from in the store, i.e. from in the reducer
-        courses: state.courses
+        settings: state.courses
     };
 }
 

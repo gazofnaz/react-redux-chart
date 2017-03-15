@@ -4,8 +4,13 @@
     min-width: 550px;
     max-width: 850px;
     margin: 0 auto;
+    padding-bottom: 20px;
 }
 
 a.active{
     color: orange;
+}
+
+nav{
+    margin-bottom: 20px;
 }

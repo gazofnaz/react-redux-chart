@@ -1,35 +1,25 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
+import {connect} from 'react-redux';
 import {Radar} from 'react-chartjs';
 
+/**
+ * Render the chart
+ */
 class HomePage extends React.Component {
+
     render(){
 
-        const ratings = [
-            2.5, // Server Configuration
-            2,   // Security
-            3,   // DevOps
-            2.5, // Databases
-            4,   // Automated Testing
-            4,   // Coding (Backend)
-            3.5, // Coding (Front End)
-            3,   // Design & UX
-            2.5, // Coding (JS Frameworks)
-            3    // Documentation
-        ];
+        // here we make the settings usable
+        const {settings} = this.props;
+
+        // create new array with each rating e.g. [2.5, ...]
+        const ratings = settings.map(setting => setting['value']);
+
+        // create new array with each title e.g. ["Security", ...]
+        const labels = settings.map(setting => setting['title']);
 
         const chartData = {
-            labels: [
-                "Server Configuration",
-                "Security",
-                "Dev Ops",
-                "Databases",
-                "Automated Testing",
-                "Coding (Backend)",
-                "Coding (Front End)",
-                "Design & UX",
-                "Coding (JS Frameworks)",
-                "Documentation"
-            ],
+            labels,
             datasets: [
                 {
                     label: "Ratings",
@@ -61,4 +51,18 @@ class HomePage extends React.Component {
     }
 }
 
-export default HomePage;
+// here we make the settings required
+HomePage.propTypes = {
+    settings: PropTypes.array.isRequired
+};
+
+// Here we map our settings to the props in this component
+function mapStateToProps(state, ownProps){
+    return{
+        // get course data from in the store, i.e. from in the reducer
+        settings: state.courses
+    };
+}
+
+// And here we connect ourselves to the multiverse (store)
+export default connect(mapStateToProps)(HomePage);
