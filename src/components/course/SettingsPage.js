@@ -19,10 +19,7 @@ class SettingsPage extends React.Component {
         const {settings} = this.props;
         // This becomes quite clean
         return(
-            <div>
-                <h1>Settings</h1>
-                <SettingsList settings={settings}/>
-            </div>
+            <SettingsList settings={settings}/>
         );
     }
 }
