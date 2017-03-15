@@ -1,18 +1,22 @@
 import React, {PropTypes} from 'react';
+import TextInput from '../common/TextInput';
 
 const SettingsListRow = ({setting}) => {
+
+    function onChange(){
+        return;
+    }
+
+    const errors = {};
+
     return (
-        <tr>
-            <td>
-                {setting.title}
-            </td>
-            <td>
-                {setting.value}
-            </td>
-            <td>
-                <a href="#" target="_blank">edit</a>
-            </td>
-        </tr>
+        <TextInput
+            name="value"
+            label={setting.title}
+            value= {setting.value}
+            onChange={onChange}
+            error={errors.title}
+        />
     );
 };
 

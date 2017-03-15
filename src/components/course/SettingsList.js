@@ -11,20 +11,11 @@ import SettingsListRow from './SettingsListRow';
  */
 const SettingsList = ({settings}) => {
     return (
-        <table className="table">
-            <thead>
-            <tr>
-                <th>Setting</th>
-                <th>Value</th>
-                <th>Options</th>
-            </tr>
-            </thead>
-            <tbody>
+        <form className="form-horizontal">
             {settings.map(setting =>
                 <SettingsListRow key={setting.title} setting={setting} />
             )}
-            </tbody>
-        </table>
+        </form>
     );
 };
 
