@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import App from './components/App';
 import HomePage from './components/home/HomePage';
-import CoursesPage from './components/course/CoursesPage';
+import SettingsPage from './components/course/SettingsPage';
 
 /**
  * Here we apply our routes
@@ -13,6 +13,6 @@ import CoursesPage from './components/course/CoursesPage';
 export default (
     <Route path="/" component={App}>
         <IndexRoute component={HomePage}/>
-        <Route path="settings" component={CoursesPage}/>
+        <Route path="settings" component={SettingsPage}/>
     </Route>
 );

@@ -2,12 +2,12 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import * as courseActions from '../../actions/courseActions';
 import {bindActionCreators} from 'redux';
-import CourseList from '../course/CourseList';
+import SettingsList from '../course/SettingsList';
 
 /**
  * List all the courses
  */
-class CoursesPage extends React.Component {
+class SettingsPage extends React.Component {
 
     constructor( props, context ){
         super( props, context );
@@ -21,7 +21,7 @@ class CoursesPage extends React.Component {
         return(
             <div>
                 <h1>Settings</h1>
-                <CourseList courses={courses}/>
+                <SettingsList courses={courses}/>
             </div>
         );
     }
@@ -31,7 +31,7 @@ class CoursesPage extends React.Component {
  * I feel like this was defined somewhere as a requirement...
  * @type {{}}
  */
-CoursesPage.propTypes = {
+SettingsPage.propTypes = {
     courses: PropTypes.array.isRequired,
     actions: PropTypes.object.isRequired
 };
@@ -67,8 +67,8 @@ function mapDispatchToProps(dispatch){
 
 // Connect is a higher order function that does some more magic and creates container components
 // Connect will inject a dispatcher by default to this.props.
-export default connect(mapStateToProps, mapDispatchToProps)(CoursesPage);
+export default connect(mapStateToProps, mapDispatchToProps)(SettingsPage);
 
 // longer version
 // const temp = connect(mapStateToProps, mapDispatchToProps)
-// export default temp(CoursesPage);
+// export default temp(SettingsPage);

@@ -9,7 +9,7 @@ import SettingsListRow from './SettingsListRow';
  * @returns {XML}
  * @constructor
  */
-const CourseList = ({courses}) => {
+const SettingsList = ({courses}) => {
     return (
         <table className="table">
             <thead>
@@ -28,8 +28,8 @@ const CourseList = ({courses}) => {
     );
 };
 
-CourseList.propTypes = {
+SettingsList.propTypes = {
     courses: PropTypes.array.isRequired
 };
 
-export default CourseList;
+export default SettingsList;
