@@ -14,7 +14,7 @@ export default function courseReducer(state =[], action){
         // can't just change the course in the state array
         case types.UPDATE_SETTINGS_SUCCESS:{
             // Remove the old value from the array (creates new array)
-            let cleanedSettings = state.slice(action.course.id + 1);
+            let cleanedSettings = removeByIndex(state,action.course.id);
             // Insert the updated value into the same index
             cleanedSettings.splice(action.course.id, 0, action.course);
             return cleanedSettings;
@@ -25,3 +25,15 @@ export default function courseReducer(state =[], action){
     }
 
 }
+
+/**
+ * http://stackoverflow.com/a/39924727/978358
+ *
+ * @param list
+ * @param index
+ */
+const removeByIndex = (list, index) =>
+    [
+        ...list.slice(0, index),
+        ...list.slice(index + 1)
+    ];

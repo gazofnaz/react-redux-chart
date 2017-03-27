@@ -14,6 +14,7 @@ class SettingsPage extends React.Component {
         const settingsTotal = this.sumSettingsValue(props.settings, 'value');
 
         // Local state for total for now... may not be sufficient
+        // @todo does not update with form changes
         this.state ={
             settingsTotal
         };
@@ -22,22 +23,19 @@ class SettingsPage extends React.Component {
     }
 
     onChange(event){
-        // // the setting to change
-        // const setting_identifier = event.target.name;
-        // // all settings
-        // let {settings} = this.props;
-        // // old setting from array
-        // let oldSetting = settings.find(setting => setting.identifier === setting_identifier);
-        // // assign new value
-        // oldSetting['value'] = parseInt( event.target.value, 10 );
-        const oldSetting = {
-            id:0,
-            identifier:"server_configuration",
-            title:"Server Configuration",
-            value:4
-        };
+        // the setting to change
+        const setting_identifier = event.target.name;
+        // all settings
+        let {settings} = this.props;
+        // old setting from array
+        let oldSetting = settings.find(setting => setting.identifier === setting_identifier);
 
-        this.props.actions.saveSetting(oldSetting);
+        // I think find returns something we can't mutate...
+        let newSetting = Object.assign({}, oldSetting, {
+            value: parseFloat( event.target.value )
+        });
+
+        this.props.actions.saveSetting(newSetting);
 
     }
 

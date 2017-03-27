@@ -26,61 +26,61 @@ export function loadCourses(){
                 id:    0,
                 identifier: "server_configuration",
                 title: "Server Configuration",
-                value: 2.5
+                value: 5
             },
             {
                 id:    1,
                 identifier: "security",
                 title: "Security",
-                value: 2
+                value: 4
             },
             {
                 id:    2,
                 identifier: "dev_ops",
                 title: "Dev Ops",
-                value: 3
+                value: 6
             },
             {
                 id:    3,
                 identifier: "databases",
                 title: "Databases",
-                value: 2.5
+                value: 5
             },
             {
                 id:    4,
                 identifier: "automated_testing",
                 title: "Automated Testing",
-                value: 4
+                value: 8
             },
             {
                 id:    5,
                 identifier: "coding_backend",
                 title: "Coding (Backend)",
-                value: 4
+                value: 8
             },
             {
                 id:    6,
                 identifier: "coding_frontend",
                 title: "Coding (Front End)",
-                value: 3.5
+                value: 7
             },
             {
                 id:    7,
                 identifier: "design",
                 title: "Design & UX",
-                value: 3
+                value: 6
             },
             {
                 id:    8,
                 identifier: "coding_js",
                 title: "Coding (JS Frameworks)",
-                value: 2.5
+                value: 5
             },
             {
                 id:    9,
                 identifier: "documentation",
                 title: "Documentation",
-                value: 3
+                value: 6
             }
         ];
         // cheating because we know it's hard coded
