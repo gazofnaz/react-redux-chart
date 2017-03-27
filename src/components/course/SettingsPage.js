@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import * as courseActions from '../../actions/courseActions';
 import {bindActionCreators} from 'redux';
-import SettingsList from '../course/SettingsList';
+import TextInput from '../common/TextInput';
 
 /**
  * List all the settings
@@ -17,7 +17,30 @@ class SettingsPage extends React.Component {
         this.state ={
             settingsTotal
         };
+
+        this.onChange = this.onChange.bind(this);
     }
+
+    onChange(event){
+        // // the setting to change
+        // const setting_identifier = event.target.name;
+        // // all settings
+        // let {settings} = this.props;
+        // // old setting from array
+        // let oldSetting = settings.find(setting => setting.identifier === setting_identifier);
+        // // assign new value
+        // oldSetting['value'] = parseInt( event.target.value, 10 );
+        const oldSetting = {
+            id:0,
+            identifier:"server_configuration",
+            title:"Server Configuration",
+            value:4
+        };
+
+        this.props.actions.saveSetting(oldSetting);
+
+    }
+
 
     /**
      * http://stackoverflow.com/a/23249575/978358
@@ -36,12 +59,24 @@ class SettingsPage extends React.Component {
     render(){
         // How do we know settings will always be props? Anyway, it keeps things shorter
         const {settings} = this.props;
+
+        const {errors} = [];
         // This becomes quite clean
         return(
             <div>
-                <SettingsList
-                    settings={settings}
-                />
+                <form className="form-horizontal">
+                    {settings.map(setting =>
+                        <TextInput
+                            key={setting.identifier}
+                            id={setting.id}
+                            name={setting.identifier}
+                            label={setting.title}
+                            value= {setting.value}
+                            onChange={this.onChange}
+                            error={errors}
+                        />
+                    )}
+                </form>
                 <div>
                     Total: {this.state.settingsTotal}
                 </div>

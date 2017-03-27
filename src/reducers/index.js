@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import courses from './courseReducer';
+import courses from './settingsReducer';
 
 /**
  * Apply all the reducers here, or something
