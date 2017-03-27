@@ -66,15 +66,15 @@ export function loadCourses(){
             },
             {
                 id:    7,
-                identifier: "design",
-                title: "Design & UX",
-                value: 6
-            },
-            {
-                id:    8,
                 identifier: "coding_js",
                 title: "Coding (JS Frameworks)",
                 value: 5
+            },
+            {
+                id:    8,
+                identifier: "design",
+                title: "Design & UX",
+                value: 6
             },
             {
                 id:    9,
