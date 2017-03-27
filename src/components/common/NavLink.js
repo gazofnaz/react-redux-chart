@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 
 class NavLink extends Component {
@@ -17,6 +17,10 @@ class NavLink extends Component {
 // is this right?
 NavLink.contextTypes = {
     router: React.PropTypes.object
+};
+
+NavLink.propTypes = {
+    to: PropTypes.string.isRequired
 };
 
 export default NavLink;

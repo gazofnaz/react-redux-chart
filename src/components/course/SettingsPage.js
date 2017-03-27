@@ -11,6 +11,25 @@ class SettingsPage extends React.Component {
 
     constructor( props, context ){
         super( props, context );
+        const settingsTotal = this.sumSettingsValue(props.settings, 'value');
+
+        // Local state for total for now... may not be sufficient
+        this.state ={
+            settingsTotal
+        };
+    }
+
+    /**
+     * http://stackoverflow.com/a/23249575/978358
+     *
+     * @param items
+     * @param prop
+     * @returns {*}
+     */
+    sumSettingsValue(items, prop){
+        return items.reduce( function(a, b){
+            return a + b[prop];
+        }, 0);
     }
 
     // Don't define new functions inside a render call, it impacts performance
@@ -19,7 +38,14 @@ class SettingsPage extends React.Component {
         const {settings} = this.props;
         // This becomes quite clean
         return(
-            <SettingsList settings={settings}/>
+            <div>
+                <SettingsList
+                    settings={settings}
+                />
+                <div>
+                    Total: {this.state.settingsTotal}
+                </div>
+            </div>
         );
     }
 }
