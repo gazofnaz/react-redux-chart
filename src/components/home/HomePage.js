@@ -7,6 +7,8 @@ import {Radar} from 'react-chartjs';
  */
 class HomePage extends React.Component {
 
+    // @todo fix bug where clicking chart navigation entry re-renders chart with incorrect titles
+
     render(){
 
         // here we make the settings usable
@@ -41,7 +43,6 @@ class HomePage extends React.Component {
             scaleShowLabels:        true,
             pointLabelFontSize:     12
         };
-
 
         return(
             <div>

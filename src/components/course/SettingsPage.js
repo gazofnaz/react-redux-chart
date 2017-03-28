@@ -101,9 +101,27 @@ SettingsPage.propTypes = {
  * @param ownProps
  */
 function mapStateToProps(state, ownProps){
+
+    // @todo: this feels like I'm mutating the store...
+
+    // get values which can be optionally passed as query parameters
+    let querySettings = ownProps.location.query;
+    let stateSettings = state.courses;
+
+    // loop through each query param
+    for (let settingName in querySettings) {
+        // check because for in is crap
+        if (querySettings.hasOwnProperty(settingName)) {
+            // if this param matches a setting
+            let matchedSetting = stateSettings.find(setting => setting.identifier === settingName);
+            // set the value
+            stateSettings[matchedSetting.id]['value'] = parseFloat(querySettings[settingName]);
+        }
+    }
+
     return{
         // get course data from in the store, i.e. from in the reducer
-        settings: state.courses
+        settings: stateSettings
     };
 }
 
