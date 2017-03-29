@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import * as courseActions from '../../actions/courseActions';
 import {bindActionCreators} from 'redux';
-import TextInput from '../common/TextInput';
+import NumericInput from 'react-numeric-input';
 
 /**
  * List all the settings
@@ -22,21 +22,26 @@ class SettingsPage extends React.Component {
         this.onChange = this.onChange.bind(this);
     }
 
-    onChange(event){
-        // the setting to change
-        const setting_identifier = event.target.name;
+    /**
+     * Change handler
+     *
+     * @todo binding in jsx is bad for performance.
+     *
+     * @param setting_identifier
+     * @param eventValue
+     */
+    onChange( setting_identifier, eventValue){
+
         // all settings
         let {settings} = this.props;
         // old setting from array
         let oldSetting = settings.find(setting => setting.identifier === setting_identifier);
-
         // I think find returns something we can't mutate...
         let newSetting = Object.assign({}, oldSetting, {
-            value: parseFloat( event.target.value )
+            value: eventValue
         });
 
         this.props.actions.saveSetting(newSetting);
-
     }
 
 
@@ -57,25 +62,41 @@ class SettingsPage extends React.Component {
     render(){
         // How do we know settings will always be props? Anyway, it keeps things shorter
         const {settings} = this.props;
-
-        const {errors} = [];
         // This becomes quite clean
         return(
             <div>
-                <form className="form-horizontal">
+                <form
+                    id="some-form"
+                    name="some-form"
+                    className="form-horizontal col-sm-2 col-sm-offset-2"
+                    >
                     {settings.map(setting =>
-                        <TextInput
-                            key={setting.identifier}
-                            id={setting.id}
+
+                    <div key={setting.identifier} className="form-group text-center">
+
+                        <label
+                            htmlFor={"form-setting-" + setting.identifier}>
+                            {setting.title}
+                        </label>
+
+                        <NumericInput
+                            form="some-form"
+                            className="form-control"
+                            min={0}
+                            max={60}
+                            id={"form-setting-" + setting.identifier}
                             name={setting.identifier}
-                            label={setting.title}
-                            value= {setting.value}
-                            onChange={this.onChange}
-                            error={errors}
+                            value={setting.value}
+                            onChange={this.onChange.bind(this, setting.identifier)}
+                            mobile
                         />
+
+                    </div>
+
                     )}
+
                 </form>
-                <div>
+                <div className="col-sm-12">
                     Total: {this.state.settingsTotal}
                 </div>
             </div>
