@@ -7,8 +7,6 @@ import {Radar} from 'react-chartjs';
  */
 class HomePage extends React.Component {
 
-    // @todo fix bug where clicking chart navigation entry re-renders chart with incorrect titles
-
     render(){
 
         // here we make the settings usable
@@ -44,9 +42,12 @@ class HomePage extends React.Component {
             pointLabelFontSize:     12
         };
 
+        // redraw option seems to prevent a bug whereby clicking on the chart tab (i.e. reload)
+        // caused the chart to redraw with one label rotated
+        // https://github.com/reactjs/react-chartjs/issues/170
         return(
             <div>
-                <Radar data={chartData} options={chartOptions}/>
+                <Radar data={chartData} options={chartOptions} redraw/>
             </div>
         );
     }
