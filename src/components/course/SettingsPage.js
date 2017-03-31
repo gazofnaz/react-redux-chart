@@ -11,14 +11,6 @@ class SettingsPage extends React.Component {
 
     constructor( props, context ){
         super( props, context );
-        const settingsTotal = this.sumSettingsValue(props.settings, 'value');
-
-        // Local state for total for now... may not be sufficient
-        // @todo does not update with form changes
-        this.state ={
-            settingsTotal
-        };
-
         this.onChange = this.onChange.bind(this);
     }
 
@@ -42,20 +34,6 @@ class SettingsPage extends React.Component {
         });
 
         this.props.actions.saveSetting(newSetting);
-    }
-
-
-    /**
-     * http://stackoverflow.com/a/23249575/978358
-     *
-     * @param items
-     * @param prop
-     * @returns {*}
-     */
-    sumSettingsValue(items, prop){
-        return items.reduce( function(a, b){
-            return a + b[prop];
-        }, 0);
     }
 
     // Don't define new functions inside a render call, it impacts performance
@@ -97,7 +75,7 @@ class SettingsPage extends React.Component {
 
                 </form>
                 <div className="col-sm-12">
-                    Total: {this.state.settingsTotal}
+                    Total: {this.props.settingsTotal}
                 </div>
             </div>
         );
@@ -110,6 +88,7 @@ class SettingsPage extends React.Component {
  */
 SettingsPage.propTypes = {
     settings: PropTypes.array.isRequired,
+    settingsTotal: PropTypes.number.isRequired,
     actions: PropTypes.object.isRequired
 };
 
@@ -140,10 +119,26 @@ function mapStateToProps(state, ownProps){
         }
     }
 
+    const settingsTotal = sumSettingsValue(stateSettings, 'value');
+
     return{
         // get course data from in the store, i.e. from in the reducer
-        settings: stateSettings
+        settings: stateSettings,
+        settingsTotal: settingsTotal
     };
+}
+
+/**
+ * http://stackoverflow.com/a/23249575/978358
+ *
+ * @param items
+ * @param prop
+ * @returns {*}
+ */
+function sumSettingsValue(items, prop){
+    return items.reduce( function(a, b){
+        return a + b[prop];
+    }, 0);
 }
 
 /**
