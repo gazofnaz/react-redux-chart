@@ -17,20 +17,17 @@ class SettingsPage extends React.Component {
     /**
      * Change handler
      *
-     * @todo binding in jsx is bad for performance.
-     *
-     * @param setting_identifier
-     * @param eventValue
+     * @param event
      */
-    onChange( setting_identifier, eventValue){
+    onChange(event){
 
         // all settings
         let {settings} = this.props;
         // old setting from array
-        let oldSetting = settings.find(setting => setting.identifier === setting_identifier);
+        let oldSetting = settings.find(setting => setting.identifier === event.target.name);
         // I think find returns something we can't mutate...
         let newSetting = Object.assign({}, oldSetting, {
-            value: eventValue
+            value: parseInt(event.target.value, 10)
         });
 
         this.props.actions.saveSetting(newSetting);
@@ -42,40 +39,46 @@ class SettingsPage extends React.Component {
         const {settings} = this.props;
         // This becomes quite clean
         return(
-            <div>
+            <div className="row">
                 <form
-                    id="some-form"
-                    name="some-form"
-                    className="form-horizontal col-sm-2 col-sm-offset-2"
+                    className="form-horizontal"
                     >
                     {settings.map(setting =>
 
                     <div key={setting.identifier} className="form-group text-center">
 
                         <label
+                            className="col-sm-3"
                             htmlFor={"form-setting-" + setting.identifier}>
                             {setting.title}
                         </label>
-
-                        <NumericInput
-                            form="some-form"
-                            className="form-control"
-                            min={0}
-                            max={60}
-                            id={"form-setting-" + setting.identifier}
-                            name={setting.identifier}
-                            value={setting.value}
-                            onChange={this.onChange.bind(this, setting.identifier)}
-                            mobile
-                        />
-
+                        <div className="col-sm-8">
+                            <input
+                                className="form-control"
+                                min={0}
+                                max={60}
+                                id={"form-setting-" + setting.identifier}
+                                type="range"
+                                name={setting.identifier}
+                                value={setting.value}
+                                onChange={this.onChange}
+                            />
+                        </div>
+                        <div className="col-sm-1">
+                            <p>{setting.value}</p>
+                        </div>
                     </div>
 
                     )}
 
                 </form>
-                <div className="col-sm-12">
-                    Total: {this.props.settingsTotal}
+                <div className="row">
+                    <div className="col-sm-3 total text-center">
+                        Total
+                    </div>
+                    <div className="col-sm-offset-8 col-sm-1 text-center">
+                        {this.props.settingsTotal}
+                    </div>
                 </div>
             </div>
         );
