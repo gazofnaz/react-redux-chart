@@ -2,7 +2,6 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import * as courseActions from '../../actions/courseActions';
 import {bindActionCreators} from 'redux';
-import NumericInput from 'react-numeric-input';
 
 /**
  * List all the settings
@@ -37,47 +36,42 @@ class SettingsPage extends React.Component {
     render(){
         // How do we know settings will always be props? Anyway, it keeps things shorter
         const {settings} = this.props;
+        const {settingsTotal} = this.props;
         // This becomes quite clean
         return(
             <div className="row">
-                <form
-                    className="form-horizontal"
-                    >
+                <form className="form-horizontal">
                     {settings.map(setting =>
-
-                    <div key={setting.identifier} className="form-group text-center">
-
-                        <label
-                            className="col-sm-3"
-                            htmlFor={"form-setting-" + setting.identifier}>
-                            {setting.title}
-                        </label>
-                        <div className="col-sm-8">
-                            <input
-                                className="form-control"
-                                min={0}
-                                max={60}
-                                id={"form-setting-" + setting.identifier}
-                                type="range"
-                                name={setting.identifier}
-                                value={setting.value}
-                                onChange={this.onChange}
-                            />
+                        <div key={setting.identifier} className="form-group text-center">
+                            <label
+                                className="col-sm-3"
+                                htmlFor={"form-setting-" + setting.identifier}>
+                                {setting.title}
+                            </label>
+                            <div className="col-sm-8">
+                                <input
+                                    className="form-control"
+                                    min={0}
+                                    max={60}
+                                    id={"form-setting-" + setting.identifier}
+                                    type="range"
+                                    name={setting.identifier}
+                                    value={setting.value}
+                                    onChange={this.onChange}
+                                />
+                            </div>
+                            <div className="col-sm-1">
+                                <p>{setting.value}</p>
+                            </div>
                         </div>
-                        <div className="col-sm-1">
-                            <p>{setting.value}</p>
-                        </div>
-                    </div>
-
                     )}
-
                 </form>
                 <div className="row">
                     <div className="col-sm-3 total text-center">
-                        Total
+                        <p className={this.props.totalError}>Total</p>
                     </div>
                     <div className="col-sm-offset-8 col-sm-1 text-center">
-                        {this.props.settingsTotal}
+                        <p className={this.props.totalError}>{settingsTotal}</p>
                     </div>
                 </div>
             </div>
@@ -90,9 +84,10 @@ class SettingsPage extends React.Component {
  * @type {{}}
  */
 SettingsPage.propTypes = {
-    settings: PropTypes.array.isRequired,
-    settingsTotal: PropTypes.number.isRequired,
-    actions: PropTypes.object.isRequired
+    settings:       PropTypes.array.isRequired,
+    settingsTotal:  PropTypes.number.isRequired,
+    actions:        PropTypes.object.isRequired,
+    totalError:     PropTypes.string
 };
 
 /**
@@ -124,10 +119,24 @@ function mapStateToProps(state, ownProps){
 
     const settingsTotal = sumSettingsValue(stateSettings, 'value');
 
+    // @todo not sure if I should have this much logic in here
+    let totalError = 'text-success';
+
+    // too high
+    if(settingsTotal > 60) {
+        totalError = 'text-danger';
+    }
+    // too low
+    else if(settingsTotal < 60){
+        totalError = 'text-warning';
+    }
+
+    // @todo make that logic global to allow nav to be killed
+
     return{
-        // get course data from in the store, i.e. from in the reducer
         settings: stateSettings,
-        settingsTotal: settingsTotal
+        settingsTotal,
+        totalError
     };
 }
 
